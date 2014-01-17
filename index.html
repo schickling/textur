@@ -11,12 +11,12 @@
 	<canvas id="canvas"></canvas>
 </div>
 <div id="controls">
-	<label for="freqX">Freqency X</label>
-	<input id="freqX" type="range" min="1" max="10">	
-	<label for="freqY">Freqency Y</label>
-	<input id="freqY" type="range" min="1" max="10">	
-	<label for="octaves">Octaves</label>
-	<input id="octaves" type="number" min="1" max="10" value="5">	
+	<label for="latticeDistanceX">Lattice X distance <span id="latticeDistanceXValue"></span></label>
+	<input id="latticeDistanceX" type="range" min="1" max="100" value="10">	
+	<label for="latticeDistanceY">Lattice Y distance <span id="latticeDistanceYValue"></span></label>
+	<input id="latticeDistanceY" type="range" min="1" max="100" value="10">	
+	<label for="octaves">Number of octaves <span id="octavesValue"></span></label>
+	<input id="octaves" type="range" min="1" max="10" value="1">	
 	<button id="draw">Generate</button>
 </div>
 <script type="text/javascript" src="helper.js"></script>

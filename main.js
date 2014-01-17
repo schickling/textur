@@ -1,6 +1,8 @@
 var canvasEl = document.getElementById('canvas'),
 	context = canvasEl.getContext('2d'),
 	drawEl = document.getElementById('draw'),
+	inputIds = ['latticeDistanceX', 'latticeDistanceY', 'octaves'],
+	vals = [],
 	width = parseInt(0.8 * window.innerWidth, 10),
 	height = window.innerHeight;
 
@@ -8,10 +10,35 @@ function init() {
 	canvasEl.width = width;
 	canvasEl.height = height;
 	initListeners();
+	run();
 }
 
 function initListeners() {
-	drawEl.addEventListener('click', draw);
+	drawEl.addEventListener('click', run);
+	inputIds.forEach(function(inputId) {
+		var el = document.getElementById(inputId);
+		el.addEventListener('change', run);
+	});
+}
+
+function updateVals () {
+	inputIds.forEach(function(inputId) {
+		var el = document.getElementById(inputId);
+		vals[inputId] = el.value;
+	});
+}
+
+function syncLabelValues () {
+	inputIds.forEach(function(inputId) {
+		var el = document.getElementById(inputId + 'Value');
+		el.innerHTML = vals[inputId];
+	});
+}
+
+function run () {
+	updateVals();
+	syncLabelValues();
+	draw();
 }
 
 function draw() {
@@ -35,4 +62,3 @@ function gridToImageData(grid) {
 }
 
 init();
-draw();
