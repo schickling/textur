@@ -4,13 +4,13 @@ window.hexColorForValue = function(val) {
 	return '#' + intensityString + intensityString + intensityString;
 }
 
-window.generateRandomArray = function(seed, height, width) {
-	var randomValues = new Array(height);
+window.generateRandomArray = function(seed, width, height) {
+	var randomValues = [];
 
-	for(i = 0; i < height; i++) {
-		randomValues[i] = new Array(width);
-		for(int j = 0; j < width; j++) {
-			randomValues[i][j] = Math.random();
+	for(var y = 0; y < height; y++) {
+		randomValues[y] = [];
+		for(var x = 0; x < width; x++) {
+			randomValues[y][x] = Math.random();
 		}
 	}
 

@@ -6,15 +6,16 @@ var canvasEl = document.getElementById('canvas'),
 canvasEl.width = width;
 canvasEl.height = height;
 
+randomValues = generateRandomArray(0, width, height);
+
 for (var y = 0; y < height; y++) {
 	for (var x = 0; x < width; x++) {
-		var id = context.createImageData(1, 1);
-		var d = id.data;
-		var rand = Math.random() * 255;
-		d[0] = rand;
-		d[1] = rand;
-		d[2] = rand;
-		d[3] = 255;
-		context.putImageData(id, x, y);
+		var pixel = context.createImageData(1, 1),
+		rand = randomValues[y][x] * 255;
+		pixel.data[0] = rand;
+		pixel.data[1] = rand;
+		pixel.data[2] = rand;
+		pixel.data[3] = 255;
+		context.putImageData(pixel, x, y);
 	}
 }
