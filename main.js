@@ -35,3 +35,4 @@ function gridToImageData(grid) {
 }
 
 init();
+draw();
