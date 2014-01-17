@@ -1,33 +1,37 @@
 var canvasEl = document.getElementById('canvas'),
 	context = canvasEl.getContext('2d'),
 	drawEl = document.getElementById('draw'),
-	width = 0.8 * window.innerWidth,
+	width = parseInt(0.8 * window.innerWidth, 10),
 	height = window.innerHeight;
 
-function init () {
+function init() {
 	canvasEl.width = width;
 	canvasEl.height = height;
 	initListeners();
 }
 
-function initListeners () {
+function initListeners() {
 	drawEl.addEventListener('click', draw);
 }
 
 function draw() {
 	context.clearRect(0, 0, width, height);
-	randomValues = generateRandomArray(0, width, height);
-	for (var y = 0; y < height; y++) {
-		for (var x = 0; x < width; x++) {
-			var pixel = context.createImageData(1, 1),
-				rand = randomValues[y][x] * 255;
-			pixel.data[0] = rand;
-			pixel.data[1] = rand;
-			pixel.data[2] = rand;
-			pixel.data[3] = 255;
-			context.putImageData(pixel, x, y);
-		}
+	var randomValues = generateRandomArray(0, width, height),
+		imageData = gridToImageData(randomValues);
+
+	context.putImageData(imageData, 0, 0);
+}
+
+function gridToImageData(grid) {
+	var imageData = context.createImageData(width, height);
+	for (var i = 0; i < imageData.data.length; i += 4) {
+		var offset = i / 4,
+			y = parseInt(offset / width),
+			x = offset % width,
+			rand = grid[y][x] * 255;
+		imageData.data.set([rand, rand, rand, 255], i);
 	}
+	return imageData;
 }
 
 init();
