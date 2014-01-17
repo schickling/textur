@@ -1,0 +1,11 @@
+#main {
+	float: left;
+	width: 80%;
+}
+
+#controls {
+	float: left;
+	width: 20%;
+	background: #000;
+	color: #fff;
+}
