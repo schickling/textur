@@ -24,15 +24,15 @@ window.latticeWithFrequency = function(height, width, latticeDistX, latticeDistY
 
 	var randomValues = generateRandomArray(0, numNodesHeight, numNodesWidth);
 
-	LatticeWithFrequency.prototype.getColor = function(xPos, yPos) {
+	function getColor(xPos, yPos) {
 		//if(xPos % nodeDistWidth == 0 && yPos % nodeDistHeight == 0) { // on lattice point
 		//	return randomValues[xPos / nodeDistWidth][yPos / nodeDistHeight];
 		//}
 
-		var latticeXPosMin = floor(xPos / latticeDistX);
-		var latticeXPosMax = ceil(xPos / latticeDistX);
-		var latticeYPosMin = floor(yPos / latticeDistY);
-		var latticeYPosMax = ceil(yPos / latticeDistY);
+		var latticeXPosMin = Math.floor(xPos / latticeDistX);
+		var latticeXPosMax = Math.ceil(xPos / latticeDistX);
+		var latticeYPosMin = Math.floor(yPos / latticeDistY);
+		var latticeYPosMax = Math.ceil(yPos / latticeDistY);
 
 		// calculate distances and values
 		distances = [];
@@ -67,15 +67,24 @@ window.latticeWithFrequency = function(height, width, latticeDistX, latticeDistY
 		var res = 0.0;
 
 		var distSum = 0.0;
-		for(i = 0; i < distances.length; i++) {
+		for(var i = 0; i < distances.length; i++) {
 			distSum += distances[i];
 		}
 
-		for(i = 0; i < distances.length; i++) {
+		for(var i = 0; i < distances.length; i++) {
 			res += values[i] * (distances[i] / distSum);
 		}
 
 		return res;
 	}
 
+	var finalValues = [];
+	for(var y = 0; y < height; y++) {
+		finalValues[y] = [];
+		for(var x = 0; x < width; x++) {
+			finalValues[y].push(getColor(x, y));
+		}
+	}
+
+	return finalValues;
 }

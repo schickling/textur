@@ -17,7 +17,10 @@ function initListeners() {
 	drawEl.addEventListener('click', run);
 	inputIds.forEach(function(inputId) {
 		var el = document.getElementById(inputId);
-		el.addEventListener('change', run);
+		el.addEventListener('change', function() {
+			updateVals();
+			syncLabelValues();
+		});
 	});
 }
 
@@ -43,7 +46,7 @@ function run () {
 
 function draw() {
 	context.clearRect(0, 0, width, height);
-	var randomValues = generateRandomArray(0, width, height),
+	var randomValues = latticeWithFrequency(height, width, vals['latticeDistanceX'], vals['latticeDistanceY']),
 		imageData = gridToImageData(randomValues);
 
 	context.putImageData(imageData, 0, 0);
